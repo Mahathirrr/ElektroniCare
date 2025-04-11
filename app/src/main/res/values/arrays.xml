@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="device_types">
+        <item>Smartphone</item>
+        <item>Tablet</item>
+        <item>Laptop</item>
+        <item>Desktop</item>
+        <item>TV</item>
+        <item>Audio</item>
+        <item>Kamera</item>
+        <item>Perangkat Rumah Tangga</item>
+        <item>Lainnya</item>
+    </string-array>
+</resources>

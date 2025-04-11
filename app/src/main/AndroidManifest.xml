@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <!-- Declare that your app uses the camera feature -->
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.ElektroniCare">
+
+        <activity
+            android:name=".activities.SplashActivity"
+            android:exported="true"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activities.LoginActivity" />
+        <activity android:name=".activities.RegisterActivity" />
+        <activity android:name=".activities.MainActivity" />
+        <activity android:name=".activities.CreateRequestActivity" />
+        <activity android:name=".activities.RequestDetailActivity" />
+        <activity android:name=".activities.OffersActivity" />
+        <activity android:name=".activities.ProfileActivity" />
+        <activity android:name=".activities.TrackRepairActivity" />
+        <activity android:name=".activities.EditRequestActivity" />
+        <activity android:name=".activities.EditProfileActivity" />
+        <activity android:name=".activities.RequestsActivity" />
+        <activity android:name=".activities.SettingsActivity" />
+
+    </application>
+
+</manifest>

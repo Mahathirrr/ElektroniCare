@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="Notifikasi">
+        <SwitchPreferenceCompat
+            app:key="notifications"
+            app:title="Aktifkan notifikasi"
+            app:summary="Dapatkan pemberitahuan tentang penawaran baru dan pembaruan status perbaikan"
+            app:defaultValue="true" />
+
+        <SwitchPreferenceCompat
+            app:key="notification_offers"
+            app:title="Penawaran baru"
+            app:summary="Dapatkan pemberitahuan saat ada penawaran baru untuk permintaan perbaikan Anda"
+            app:defaultValue="true"
+            app:dependency="notifications" />
+
+        <SwitchPreferenceCompat
+            app:key="notification_status"
+            app:title="Pembaruan status"
+            app:summary="Dapatkan pemberitahuan saat status perbaikan Anda berubah"
+            app:defaultValue="true"
+            app:dependency="notifications" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="Akun">
+        <Preference
+            app:key="change_password"
+            app:title="Ubah kata sandi"
+            app:summary="Ubah kata sandi akun Anda" />
+
+        <Preference
+            app:key="delete_account"
+            app:title="Hapus akun"
+            app:summary="Hapus akun dan semua data Anda secara permanen" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="Tentang">
+        <Preference
+            app:key="app_version"
+            app:title="Versi aplikasi"
+            app:summary="1.0.0" />
+
+        <Preference
+            app:key="terms_of_service"
+            app:title="Syarat dan Ketentuan"
+            app:summary="Baca syarat dan ketentuan penggunaan aplikasi" />
+
+        <Preference
+            app:key="privacy_policy"
+            app:title="Kebijakan Privasi"
+            app:summary="Baca kebijakan privasi kami" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
