@@ -1,5 +1,7 @@
 package com.example.imageview.utils;
 
+import android.util.Log;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -9,84 +11,176 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 public class FirebaseUtil {
 
+    private static final String TAG = "FirebaseUtil";
+
     // Firebase Authentication
     public static FirebaseAuth getAuth() {
-        return FirebaseAuth.getInstance();
+        try {
+            return FirebaseAuth.getInstance();
+        } catch (Exception e) {
+            Log.e(TAG, "Error getting FirebaseAuth instance", e);
+            throw e;
+        }
     }
 
     public static FirebaseUser getCurrentUser() {
-        return getAuth().getCurrentUser();
+        try {
+            return getAuth().getCurrentUser();
+        } catch (Exception e) {
+            Log.e(TAG, "Error getting current user", e);
+            return null;
+        }
     }
 
     public static String getCurrentUserId() {
-        FirebaseUser user = getCurrentUser();
-        return user != null ? user.getUid() : null;
+        try {
+            FirebaseUser user = getCurrentUser();
+            return user != null ? user.getUid() : null;
+        } catch (Exception e) {
+            Log.e(TAG, "Error getting current user ID", e);
+            return null;
+        }
     }
 
     public static boolean isLoggedIn() {
-        return getCurrentUser() != null;
+        try {
+            return getCurrentUser() != null;
+        } catch (Exception e) {
+            Log.e(TAG, "Error checking login status", e);
+            return false;
+        }
     }
 
     // Firebase Firestore
     public static FirebaseFirestore getFirestore() {
-        return FirebaseFirestore.getInstance();
+        try {
+            return FirebaseFirestore.getInstance();
+        } catch (Exception e) {
+            Log.e(TAG, "Error getting FirebaseFirestore instance", e);
+            throw e;
+        }
     }
 
     // Users Collection
     public static CollectionReference getUsersCollection() {
-        return getFirestore().collection("users");
+        try {
+            return getFirestore().collection("users");
+        } catch (Exception e) {
+            Log.e(TAG, "Error getting users collection", e);
+            throw e;
+        }
     }
 
     public static DocumentReference getCurrentUserDocument() {
-        String userId = getCurrentUserId();
-        return userId != null ? getUsersCollection().document(userId) : null;
+        try {
+            String userId = getCurrentUserId();
+            return userId != null ? getUsersCollection().document(userId) : null;
+        } catch (Exception e) {
+            Log.e(TAG, "Error getting current user document", e);
+            return null;
+        }
     }
 
     public static DocumentReference getUserDocument(String userId) {
-        return getUsersCollection().document(userId);
+        try {
+            return getUsersCollection().document(userId);
+        } catch (Exception e) {
+            Log.e(TAG, "Error getting user document", e);
+            return null;
+        }
     }
 
     // Repair Requests Collection
     public static CollectionReference getRequestsCollection() {
-        return getFirestore().collection("repair_requests");
+        try {
+            return getFirestore().collection("repair_requests");
+        } catch (Exception e) {
+            Log.e(TAG, "Error getting requests collection", e);
+            throw e;
+        }
     }
 
     public static DocumentReference getRequestDocument(String requestId) {
-        return getRequestsCollection().document(requestId);
+        try {
+            return getRequestsCollection().document(requestId);
+        } catch (Exception e) {
+            Log.e(TAG, "Error getting request document", e);
+            return null;
+        }
     }
 
     // Offers Collection
     public static CollectionReference getOffersCollection() {
-        return getFirestore().collection("offers");
+        try {
+            return getFirestore().collection("offers");
+        } catch (Exception e) {
+            Log.e(TAG, "Error getting offers collection", e);
+            throw e;
+        }
     }
 
     public static DocumentReference getOfferDocument(String offerId) {
-        return getOffersCollection().document(offerId);
+        try {
+            return getOffersCollection().document(offerId);
+        } catch (Exception e) {
+            Log.e(TAG, "Error getting offer document", e);
+            return null;
+        }
     }
 
     // Repairs Collection
     public static CollectionReference getRepairsCollection() {
-        return getFirestore().collection("repairs");
+        try {
+            return getFirestore().collection("repairs");
+        } catch (Exception e) {
+            Log.e(TAG, "Error getting repairs collection", e);
+            throw e;
+        }
     }
 
     public static DocumentReference getRepairDocument(String repairId) {
-        return getRepairsCollection().document(repairId);
+        try {
+            return getRepairsCollection().document(repairId);
+        } catch (Exception e) {
+            Log.e(TAG, "Error getting repair document", e);
+            return null;
+        }
     }
 
     // Firebase Storage
     public static FirebaseStorage getStorage() {
-        return FirebaseStorage.getInstance();
+        try {
+            return FirebaseStorage.getInstance();
+        } catch (Exception e) {
+            Log.e(TAG, "Error getting FirebaseStorage instance", e);
+            throw e;
+        }
     }
 
     public static StorageReference getStorageReference() {
-        return getStorage().getReference();
+        try {
+            return getStorage().getReference();
+        } catch (Exception e) {
+            Log.e(TAG, "Error getting storage reference", e);
+            return null;
+        }
     }
 
     public static StorageReference getRequestPhotosReference(String requestId) {
-        return getStorageReference().child("request_photos").child(requestId);
+        try {
+            return getStorageReference().child("request_photos").child(requestId);
+        } catch (Exception e) {
+            Log.e(TAG, "Error getting request photos reference", e);
+            return null;
+        }
     }
 
     public static StorageReference getProfileImagesReference() {
-        return getStorageReference().child("profile_images");
+        try {
+            return getStorageReference().child("profile_images");
+        } catch (Exception e) {
+            Log.e(TAG, "Error getting profile images reference", e);
+            return null;
+        }
     }
 }
