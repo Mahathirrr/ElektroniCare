@@ -106,7 +106,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
-        android:text="@string/sign_in_with_google"
+        android:text="@string/sign_in_with_google"        
         app:icon="@drawable/ic_google_logo"
         app:iconGravity="textStart"
         app:iconPadding="12dp"
