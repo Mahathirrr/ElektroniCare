@@ -21,6 +21,7 @@ import com.example.imageview.adapters.RequestAdapter;
 import com.example.imageview.models.RepairRequest;
 import com.example.imageview.utils.FirebaseUtil;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -31,7 +32,7 @@ public class RequestsFragment extends Fragment implements RequestAdapter.OnReque
 
     private RecyclerView rvRequests;
     private TextView tvNoRequests;
-    private ProgressBar progressBar;
+    private ShimmerFrameLayout shimmerFrameLayout;
 
     private RequestAdapter requestAdapter;
     private List<RepairRequest> requestList;
@@ -44,7 +45,7 @@ public class RequestsFragment extends Fragment implements RequestAdapter.OnReque
         // Initialize views
         rvRequests = view.findViewById(R.id.rvRequests);
         tvNoRequests = view.findViewById(R.id.tvNoRequests);
-        progressBar = view.findViewById(R.id.progressBar);
+        shimmerFrameLayout = view.findViewById(R.id.shimmer_view_container);
 
         // Initialize list and adapter
         requestList = new ArrayList<>();
@@ -62,7 +63,7 @@ public class RequestsFragment extends Fragment implements RequestAdapter.OnReque
     }
 
     private void loadRequests() {
-        progressBar.setVisibility(View.VISIBLE);
+        shimmerFrameLayout.startShimmer();
         String userId = FirebaseUtil.getCurrentUserId();
 
         FirebaseUtil.getRequestsCollection()
@@ -71,7 +72,7 @@ public class RequestsFragment extends Fragment implements RequestAdapter.OnReque
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        progressBar.setVisibility(View.GONE);
+                        shimmerFrameLayout.stopShimmer();
                         if (task.isSuccessful()) {
                             requestList.clear();
                             for (QueryDocumentSnapshot document : task.getResult()) {

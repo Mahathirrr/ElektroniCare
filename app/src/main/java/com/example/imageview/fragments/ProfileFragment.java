@@ -27,6 +27,7 @@ import com.example.imageview.models.User;
 import com.example.imageview.utils.FirebaseUtil;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 
@@ -38,7 +39,7 @@ public class ProfileFragment extends Fragment {
     private Button btnEditProfile, btnLogout;
     private LinearLayout llMyRequests, llMyRepairs, llSettings;
     private ProgressBar progressBar;
-
+    private ShimmerFrameLayout shimmerFrameLayout;
     private User currentUser;
 
     @Nullable
@@ -56,6 +57,7 @@ public class ProfileFragment extends Fragment {
         llMyRepairs = view.findViewById(R.id.llMyRepairs);
         llSettings = view.findViewById(R.id.llSettings);
         progressBar = view.findViewById(R.id.progressBar);
+        shimmerFrameLayout = view.findViewById(R.id.shimmer_view_container);
 
         // Set up click listeners
         btnEditProfile.setOnClickListener(new View.OnClickListener() {
@@ -111,13 +113,14 @@ public class ProfileFragment extends Fragment {
     }
 
     private void loadUserData() {
-        progressBar.setVisibility(View.VISIBLE);
+        shimmerFrameLayout.setVisibility(View.VISIBLE);
+        shimmerFrameLayout.startShimmer();
 
         FirebaseUtil.getCurrentUserDocument().get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        progressBar.setVisibility(View.GONE);
+                        shimmerFrameLayout.stopShimmer();
                         if (task.isSuccessful()) {
                             DocumentSnapshot document = task.getResult();
                             if (document.exists()) {

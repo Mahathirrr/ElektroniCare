@@ -50,6 +50,12 @@ dependencies {
     // Material Design
     implementation("com.google.android.material:material:1.11.0")
 
+    // Material Design Icons
+    implementation("com.google.android.material:material-icons:1.11.0")
+    
+    // Jetpack Compose Material 3
+    implementation("androidx.compose.material3:material3:1.2.0")
+    
     // Layout & UI Components
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
@@ -70,9 +76,8 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
 
     // Firebase
-//    implementation(platform("com.google.firebase:firebase-bom:32.7.2"))
     implementation(platform("com.google.firebase:firebase-bom:33.12.0"))
-    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore")
     implementation("com.google.firebase:firebase-storage")
@@ -85,6 +90,9 @@ dependencies {
     implementation("de.hdodenhof:circleimageview:3.1.0")
 
     // Testing
+    // Shimmer Effect
+    implementation("com.facebook.shimmer:shimmer:0.5.0")
+    
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")

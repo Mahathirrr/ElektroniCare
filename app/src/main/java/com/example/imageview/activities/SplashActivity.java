@@ -33,14 +33,8 @@ public class SplashActivity extends AppCompatActivity {
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             try {
-                // Check if user is already logged in
-                if (FirebaseUtil.getCurrentUser() != null) {
-                    // User is logged in, go to MainActivity
-                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                } else {
-                    // User is not logged in, go to LoginActivity
-                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-                }
+                // Navigate to OnboardingActivity
+                startActivity(new Intent(SplashActivity.this, OnboardingActivity.class));
             } catch (Exception e) {
                 Log.e(TAG, "Error navigating from splash screen", e);
                 // If there's an error, go to login activity as fallback

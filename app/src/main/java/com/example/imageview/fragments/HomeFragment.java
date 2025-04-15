@@ -23,6 +23,7 @@ import com.example.imageview.adapters.RequestAdapter;
 import com.example.imageview.models.Repair;
 import com.example.imageview.models.RepairRequest;
 import com.example.imageview.utils.FirebaseUtil;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -36,6 +37,7 @@ public class HomeFragment extends Fragment implements RequestAdapter.OnRequestCl
     private TextView tvNoActiveRequests, tvNoActiveRepairs;
     private ProgressBar progressBar;
 
+    private ShimmerFrameLayout shimmerFrameLayout;
     private RequestAdapter requestAdapter;
     private RepairAdapter repairAdapter;
     private List<RepairRequest> requestList;
@@ -52,6 +54,7 @@ public class HomeFragment extends Fragment implements RequestAdapter.OnRequestCl
         tvNoActiveRequests = view.findViewById(R.id.tvNoActiveRequests);
         tvNoActiveRepairs = view.findViewById(R.id.tvNoActiveRepairs);
         progressBar = view.findViewById(R.id.progressBar);
+        shimmerFrameLayout = view.findViewById(R.id.shimmer_view_container);
 
         // Initialize lists and adapters
         requestList = new ArrayList<>();
@@ -75,6 +78,7 @@ public class HomeFragment extends Fragment implements RequestAdapter.OnRequestCl
     }
 
     private void loadData() {
+        shimmerFrameLayout.startShimmer();
         progressBar.setVisibility(View.VISIBLE);
         loadActiveRequests();
     }
@@ -109,6 +113,7 @@ public class HomeFragment extends Fragment implements RequestAdapter.OnRequestCl
                             // Load active repairs
                             loadActiveRepairs();
                         } else {
+                            shimmerFrameLayout.stopShimmer();
                             progressBar.setVisibility(View.GONE);
                             Toast.makeText(getContext(), "Gagal memuat permintaan: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }
@@ -124,7 +129,7 @@ public class HomeFragment extends Fragment implements RequestAdapter.OnRequestCl
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {shimmerFrameLayout.stopShimmer();
                         progressBar.setVisibility(View.GONE);
                         if (task.isSuccessful()) {
                             repairList.clear();

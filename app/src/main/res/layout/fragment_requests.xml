@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/background"
+    android:id="@+id/requestsContainer"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    >
 
-    <TextView
-        android:id="@+id/tvRequestsTitle"
-        android:layout_width="wrap_content"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardTitle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/requests"
-        android:textColor="@color/primary_text"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:layout_margin="16dp"
+        app:cardBackgroundColor="@color/background_card"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        app:layout_constraintEnd_toEndOf="@+id/rvRequests"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,13 +25,16 @@
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvRequestsTitle"
+        android:background="@color/background"
         app:tabGravity="fill"
+        app:tabIndicatorColor="@color/primary"
+        app:tabIndicatorHeight="3dp"
         app:tabMode="fixed"
         app:tabSelectedTextColor="@color/primary"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardTitle"
         app:tabTextColor="@color/secondary_text">
 
         <com.google.android.material.tabs.TabItem
@@ -51,39 +58,68 @@
             android:text="Selesai" />
     </com.google.android.material.tabs.TabLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvRequests"
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerRequests"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tabLayout"
         android:layout_marginTop="8dp"
-        android:contentDescription="Daftar permintaan perbaikan"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout"
-        tools:listitem="@layout/item_request" />
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:visibility="gone">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvRequests"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:contentDescription="Daftar permintaan perbaikan"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
-    <TextView
-        android:id="@+id/tvNoRequests"
+    <LinearLayout
+        android:id="@+id/llNoRequests"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Belum ada permintaan"
-        android:textColor="@color/secondary_text"
-        android:textSize="16sp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"        
+        android:layout_centerInParent="true"
+        >
+
+        <ImageView
+
+            android:contentDescription="@string/ic_list_alt"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_list_alt" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/belum_ada_permintaan"
+            android:textColor="@color/secondary_text" />
+    </LinearLayout>
 
     <ProgressBar
+        style="?android:attr/progressBarStyle"
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content"        
+        android:layout_centerInParent="true"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView        
+        android:id="@+id/tvRequestsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/daftar_permintaan"
+        android:textColor="@color/primary_text"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_alignStart="@+id/cardTitle"
+        android:layout_alignTop="@+id/cardTitle"/>
+</RelativeLayout>
